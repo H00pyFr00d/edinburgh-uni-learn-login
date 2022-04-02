@@ -132,3 +132,10 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# remove pycharm data folders
+dist/
+.idea/
+
+# *DON'T STORE USER DATA*
+userinfo.txt
