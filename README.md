@@ -1,25 +1,32 @@
 # UoE Learn Login
+
 A basic python program to log into the UoE learn page.
 
-
 ## Table of contents
+
 1. [Prerequisites](#prerequisites)
 2. [Installation](#installation)
 3. [Usage](#usage)
---> [Creating an executable (MacOS)](#execMacOS)
+   --> [Creating an executable (MacOS)](#execMacOS)
 
 <a name="prerequisites"/></a>
+
 ## Prerequisites
-* Selenium: 
+
+* Selenium:
+
 ```bash 
 pip install -U selenium
 ```
-* Webdriver_manager: 
+
+* Webdriver_manager:
+
 ```bash 
 pip install -U webdriver_manager
 ```
 
 <a name="installation"/></a>
+
 ## Installation
 
 Clone the repo
@@ -36,6 +43,7 @@ Now, create `userinfo.txt` in the folder you've just created and store your user
 ```
 
 <a name="usage"/></a>
+
 ## Usage
 
 ```bash
@@ -43,7 +51,9 @@ Now, create `userinfo.txt` in the folder you've just created and store your user
 ```
 
 <a name="execMacOS"/></a>
+
 ### Creating an executable (MacOS)
+
 In your desktop, create an `.exec` file:
 
 ```bash
@@ -59,6 +69,10 @@ Then give it permission,
 ```
 
 #### Notes
-1. When running the executable you might get an `operation not found` error, this could mean that your file's been [quarantined](https://www.alansiu.net/2021/08/19/troubleshooting-zsh-operation-not-permitted/).
 
-2. If your shell window stays open after the script's finished running, go to **Terminal** > **Preferences** > **Profiles** > **Shell** and change the default setting for when the shell exists from "don't close the window" to "close the window"
+1. When running the executable you might get an `operation not found` error, this could mean that your file's
+   been [quarantined](https://www.alansiu.net/2021/08/19/troubleshooting-zsh-operation-not-permitted/).
+
+2. If your shell window stays open after the script's finished running, go to **Terminal** > **Preferences** > **
+   Profiles** > **Shell** and change the default setting for when the shell exists from "don't close the window" to "
+   close the window"
