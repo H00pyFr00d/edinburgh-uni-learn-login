@@ -8,13 +8,6 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 from webdriver_manager.chrome import ChromeDriverManager
 
-chrome_options = Options()
-chrome_options.add_experimental_option("detach", True)
-chrome_options.add_experimental_option("excludeSwitches", ["enable-automation"])
-
-driver = webdriver.Chrome(ChromeDriverManager().install(), options=chrome_options)
-driver.get("https://www.ease.ed.ac.uk/cosign.cgi?cosign-eucsCosign-www.myed.ed.ac.uk&https://www.myed.ed.ac.uk/uPortal/Login?refUrl=%2Fmyed-progressive%2F")
-
 try:
     with open(os.getcwd() + "\\userinfo.txt", "r") as f:
         username = f.read().splitlines()[0]
@@ -31,6 +24,13 @@ except FileNotFoundError:
 if keyring.get_password("MyEd", username) is None:
     print("\nPassword not found for " + username)
     keyring.set_password("MyEd", username, input("Please enter your MyEd password: "))
+
+chrome_options = Options()
+chrome_options.add_experimental_option("detach", True)
+chrome_options.add_experimental_option("excludeSwitches", ["enable-automation"])
+
+driver = webdriver.Chrome(ChromeDriverManager().install(), options=chrome_options)
+driver.get("https://www.ease.ed.ac.uk/cosign.cgi?cosign-eucsCosign-www.myed.ed.ac.uk&https://www.myed.ed.ac.uk/uPortal/Login?refUrl=%2Fmyed-progressive%2F")
 
 # enter username and proceed
 WebDriverWait(driver, 3).until(EC.presence_of_element_located((By.XPATH, "//*[(@id = \"login\")]"))).send_keys(username)
