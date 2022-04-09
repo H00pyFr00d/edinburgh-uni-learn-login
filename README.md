@@ -21,14 +21,17 @@ pip3 install -U selenium
 ```bash 
 pip3 install -U webdriver_manager
 ```
+
 * Keyring:
 ```bash
 pip3 install -U keyring
 ```
+
 * Pyinstaller (Optional):
 ```
 pip3 install -U pyinstaller
 ```
+
 Note:
 Pyinstaller must be added to the PATH system environment variable
 
