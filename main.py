@@ -1,4 +1,5 @@
 import os
+from tkinter import *
 
 import keyring
 from requests.exceptions import ConnectionError
@@ -9,23 +10,74 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 from webdriver_manager.chrome import ChromeDriverManager
 
+global username, password
+
+
+def set_username(usr, main):
+    global username
+    username = usr
+    main.destroy()
+
+
+def set_password(pwd, main):
+    global password
+    password = pwd
+    main.destroy()
+
+
+def get_username():
+    # Creates a tkinter frame
+    main = Tk()
+    main.title("Please enter your student number (e.g. s2000000)")
+
+    Label(main, text='Username')
+
+    username_box = Entry(main, width=50)
+    username_box.grid(row=0, column=1, padx=5)
+    username_box.focus_set()
+
+    confirm = Button(main, text="Enter", command=lambda: set_username(username_box.get(), main))
+    confirm.grid(row=1, column=1, padx=5, pady=5)
+
+    main.mainloop()
+
+
+def get_password(usr):
+    # Creates a tkinter frame
+    main = Tk()
+    main.title("Password not found for " + usr)
+
+    Label(main, text='Password').grid(row=0)
+
+    password_box = Entry(main, width=50)
+    password_box.grid(row=0, column=1, padx=5)
+    password_box.focus_set()
+
+    confirm = Button(main, text="Enter", command=lambda: set_password(password_box.get(), main))
+    confirm.grid(row=1, column=1, padx=5, pady=5)
+
+    main.mainloop()
+
+
 try:
     with open(os.getcwd() + "\\userinfo.txt", "r") as f:
         username = f.read().splitlines()[0]
         f.close()
-except FileNotFoundError:
+except(FileNotFoundError, IndexError):
     with open(os.getcwd() + "\\userinfo.txt", "w") as f:
         while True:
-            username = input("\nEnter your UUN (s1234567): ")
-            if (input("Is " + username + " correct? (y/n): ").lower().strip() == "y") & (len(username) == 8) & (
-                    username[0] == "s"):
-                f.write(username)
-                break
+            get_username()
+            try:
+                if (len(username) == 8) & (username[0] == "s"):
+                    f.write(username)
+                    break
+            except IndexError:
+                pass
         f.close()
 
 if keyring.get_password("MyEd", username) is None:
-    print("\nPassword not found for " + username)
-    keyring.set_password("MyEd", username, input("Please enter your MyEd password: "))
+    get_password(username)
+    keyring.set_password("MyEd", username, password)
 
 chrome_options = Options()
 chrome_options.add_experimental_option("detach", True)
@@ -38,7 +90,8 @@ except ConnectionError:
     print("Cannot connect to the internet.")
 
 # enter username and proceed
-WebDriverWait(driver, 3).until(EC.presence_of_element_located((By.XPATH, "//*[(@id = \"login\")]"))).send_keys(username)
+WebDriverWait(driver, 3).until(EC.presence_of_element_located((By.XPATH, "//*[(@id = \"login\")]"))).send_keys(
+    username)
 WebDriverWait(driver, 3).until(EC.presence_of_element_located((By.XPATH, "//*[(@id = \"submit\")]"))).click()
 
 # enter password and log in
