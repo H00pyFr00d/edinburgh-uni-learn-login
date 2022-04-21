@@ -21,10 +21,17 @@ pip3 install -U selenium
 ```bash 
 pip3 install -U webdriver_manager
 ```
+
+* Keyring:
+```bash
+pip3 install -U keyring
+```
+
 * Pyinstaller (Optional):
 ```
 pip3 install -U pyinstaller
 ```
+
 Note:
 Pyinstaller must be added to the PATH system environment variable
 
@@ -37,11 +44,10 @@ Clone the repo
   git clone https://github.com/H00pyFr00d/edinburgh-uni-learn-login.git
 ```
 
-Now, create `userinfo.txt` in the folder you've just created and store your username and password as follows:
+Now, create `userinfo.txt` in the folder you've just created and store your username as follows:
 
 ```bash
   s2000000
-  $$£$£%£@$
 ```
 
 <a name="usage"/></a>
@@ -50,6 +56,8 @@ Now, create `userinfo.txt` in the folder you've just created and store your user
 ```bash
  python3 /Users/.../edinburgh-uni-learn-login/main.py
 ```
+
+Will prompt the user for their username if they have not already created the `userinfo.txt` file, and their password if it hasn't already been provided
 
 <a name="execMacOS"/></a>
 ### Creating an executable (MacOS)
